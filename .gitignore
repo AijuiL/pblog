@@ -3,3 +3,6 @@
 __pycache__
 staticfiles
 *.iml
+pblog/local_settings.py
+pblog.local_settings.py
+local_settings.py

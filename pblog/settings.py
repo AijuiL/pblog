@@ -76,16 +76,17 @@ WSGI_APPLICATION = 'pblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pblog',
-        'USER': 'admin',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+    "default": dj_database_url.config()
 }
+
+
+# try to load local_settings.py if it exists
+try:
+    from .local_settings import *
+except ImportError:
+    print 'Unable to import base settings file:'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
