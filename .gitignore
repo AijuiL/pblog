@@ -6,3 +6,4 @@ staticfiles
 pblog/local_settings.py
 pblog.local_settings.py
 local_settings.py
+*.py~
