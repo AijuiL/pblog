@@ -1,0 +1,5 @@
+*.pyc
+*.xml
+__pycache__
+staticfiles
+*.iml
