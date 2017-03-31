@@ -24,3 +24,20 @@ def showpost(request, slug):
             return HttpResponse(html)
     except:
         return  redirect('/')
+
+
+def about(requests):
+    html = '''
+<!DOCTYPE html>
+<html>
+<head><title>About Myself</title></head>
+<body>
+<h2>Jia Liu</h2>
+<hr>
+<p>
+Hi,I am Jia Liu. This my first blog
+</p>
+</body>
+</html>
+'''
+    return HttpResponse(html)
