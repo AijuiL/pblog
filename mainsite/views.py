@@ -30,3 +30,9 @@ def about(request):
     html = template.render()
 
     return HttpResponse(html)
+
+def contact(request):
+    template = get_template('contact.html')
+    html = template.render()
+
+    return HttpResponse(html)
