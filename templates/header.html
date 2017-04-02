@@ -1,5 +1,43 @@
 <!-- header.html -->
 {% load staticfiles %}
-<div class='well'>
-    <img src="{% static 'images/logo.png' %}">
-</div>
+<head>
+    <link rel="stylesheet" href="{% static 'css/header_logo.css' %}">
+</head>
+<header class="header">
+	<div class="wrapper">
+		<h1 class="site-title">
+			Jia Liu's Blog
+		</h1>
+	</div>
+	<nav class="navigation">
+		<div class="wrapper">
+			<ul class="navigation-list ul-reset">
+				<li class="navigation-item ib">
+					<a href="/" class="navigation-link">
+						Home
+					</a>
+				</li>
+				<li class="navigation-item ib">
+					<a href="/about" class="navigation-link">
+						About
+					</a>
+				</li>
+				<li class="navigation-item ib">
+					<a href="#" class="navigation-link">
+						Contact
+					</a>
+				</li>
+				<li class="navigation-item ib">
+					<a href="#" class="navigation-link">
+						FAQ
+					</a>
+				</li>
+				<li class="navigation-item ib">
+					<a href="#" class="navigation-link">
+						More
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>

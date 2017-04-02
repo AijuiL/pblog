@@ -1,7 +1,6 @@
 <!-- post.html -->
 {% extends 'base.html' %}
 {% load markdown_deux_tags %}
-{% block title %} {{ post.title }} - 文學天地 {% endblock %}
 {% block headmessage %}
     <h3 style='font-family:微軟正黑體;'>{{ post.title }}</h3>
 {% endblock %}
@@ -9,4 +8,9 @@
         <p style='font-family:微軟正黑體;font-size:12pt;letter-spacing:2pt;'>
             {{ post.body | markdown }}</a>
         </p>
+        <div class="panel-footer" style="background-color:#efefef">
+            <p>
+                發佈時間：{{ post.pub_date | date:"Y M d, h:m:s"}}
+            </p>
+        </div>
 {% endblock %}
