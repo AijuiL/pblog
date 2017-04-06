@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from datetime import  datetime
 from .models import Post
-
+from django.shortcuts import render
+from django.views.generic.list import ListView
+import markdown2
 
 # Create your views here.
 
@@ -35,4 +37,14 @@ def contact(request):
     template = get_template('contact.html')
     html = template.render()
 
+    return HttpResponse(html)
+
+
+def archive(request):
+    template = get_template('archive.html')
+    html = template.render()
+
+
+    dates = Post.objects.datetimes('pub_date', 'month', order='DESC')
+    return render(request,'archive.html',{'dates':dates})
     return HttpResponse(html)
