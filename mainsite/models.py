@@ -1,11 +1,11 @@
 #coding=utf-8
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 class Post(models.Model):
     title = models.CharField(max_length=200,verbose_name=u'title(標題)')
-    slug = models.CharField(max_length=200,verbose_name=u'slug(網址)')
     body = models.TextField(verbose_name=u'body(內文)')
     pub_date = models.DateTimeField(default=timezone.now,verbose_name=u'現在時刻')
 
@@ -17,6 +17,9 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('Post-detail', kwargs={'pk': self.pk})
 
 
 class NewTable(models.Model):

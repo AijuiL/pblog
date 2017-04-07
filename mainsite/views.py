@@ -17,10 +17,10 @@ def homepage(request):
 
     return  HttpResponse(html)
 
-def showpost(request, slug):
+def showpost(request,pk):
     template = get_template('post.html')
     try:
-        post = Post.objects.get(slug=slug)
+        post = Post.objects.get(pk=pk)
         if Post != None:
             html = template.render(locals())
             return HttpResponse(html)
@@ -48,3 +48,4 @@ def archive(request):
     dates = Post.objects.datetimes('pub_date', 'month', order='DESC')
     return render(request,'archive.html',{'dates':dates})
     return HttpResponse(html)
+

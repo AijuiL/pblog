@@ -35,7 +35,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=200, verbose_name='title(\u6a19\u984c)')),
-                ('slug', models.CharField(max_length=200, verbose_name='slug(\u7db2\u5740)')),
                 ('body', models.TextField(verbose_name='body(\u5167\u6587)')),
                 ('pub_date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='\u73fe\u5728\u6642\u523b')),
             ],

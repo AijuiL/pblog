@@ -6,7 +6,7 @@ from .models import Product
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display =  ('title', 'slug', 'pub_date')
+    list_display =  ('title', 'pub_date')
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(NewTable)
