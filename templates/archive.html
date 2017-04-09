@@ -1,28 +1,65 @@
 <!-- archive.html -->
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load markdown_deux_tags %}
-{% block title %} Jia的隨手小記-聯絡我 {% endblock %}
+{% block title %} Jia的隨手小記-所有文章 {% endblock %}
 {% block headmessage %}
     <h3 style='font-family:標楷體;'>Archive</h3>
 <hr>
 {% endblock %}
 {% block content %}
-{% regroup dates by year as dates_by_year %}
-<ul>
-    {% for mouth in dates_by_year %}
-    <!-- month 是一组月份列表 -->
-        <li>
-            {{ mouth.grouper }} 年
-            <!-- grouper 是组头，即某个月份列表的年份 -->
-            <ul>
-                {% for d in mouth.list %}
-                <!-- 再循环显示该年份组下的月份列表即可 -->
-                    <li>
-                        {{ d |date:'m' }} 月
+<head>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+
+<body>
+    {% for event_year in list_events %}
+        <ul class="year">{{event_year.keys.0}}
+            {% for month, events in event_year.values.0.items %}
+                <!--show only months with events! -->
+                {% if events %}
+                    <li id="{{event_year.keys.0}}-{{month}}" class="month">
+                        <div class="month-data">
+                            <div class="collapsed">►&nbsp;</div>
+                            <div class="expanded" style="display:none;">▼&nbsp;</div>
+                            <span class="name">{{events.0.pub_date|date:"F"}}</span>
+                            <span class="counter"> ({{events|length}})</span>
+                        </div>
+                        <ul class="events" style="display:none;">
+                        {% for event in events %}
+                            <li class="event">
+                            <a class="title" href='/post/{{event.id}}'>{{event.title}}</a>
+                                <div class="date">{{event.pub_date|date:"Y M j"}}</div>
+                            <div class="place">{{event.place}}</div>
+                            </li>
+                        {% endfor %}
+                        </ul>
                     </li>
-                {% endfor %}
-            </ul>
-        </li>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
     {% endfor %}
-</ul>
+</body>
+
+<script>
+    // toggle month
+    var toggleMonth = function(month) {
+        $(month).children('.events').slideToggle('slow');
+        $(month).find('.month-data div.collapsed').toggle();
+        $(month).find('.month-data div.expanded').toggle();
+    }
+
+    // expand the current month
+    toggleMonth($('#{{now.year}}-{{now.month}}'));
+
+    // intercept click to toggle month
+    $('.month-data').click(function() {
+        var month = $(this).parent();
+        toggleMonth(month);
+    });
+</script>
+
+
 {% endblock %}

@@ -1,0 +1,46 @@
+ul, li {
+    list-style: none outside none;
+}
+
+.year {
+  font-size: 110%;
+  font-weight: bold;
+}
+
+.month {
+    width: 300px;
+    font-size:100%;
+    font-weight:normal;
+    margin: 10px;
+}
+
+div.month-data:hover {
+    cursor: pointer;
+}
+
+li.event {
+    margin: 5px;
+    list-style: circle;
+}
+
+a.title, div.date, div.place {
+    padding: 5px;
+}
+
+div.date {
+    font-size:70%;
+}
+
+div.place {
+    padding-top:0;
+}
+
+div.collapsed, div.expanded {
+    float:left;
+    margin-top:-2px;
+}
+
+div.expanded {
+    font-size:80%;
+    margin-right:5px
+}
