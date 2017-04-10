@@ -38,7 +38,7 @@ def paginate(context, object_list, page_count):
         context['pages_first'] = 1
         context['pages_last'] = 2
 
-    return ''  # 必须加这个，否则首页会显示个None
+    return ''  # 必須加這個，否則首頁會顯示None
 
 
 def get_left(current_page, left, num_pages):

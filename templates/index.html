@@ -22,12 +22,13 @@
             </div>
             <div class="panel-footer" style="background-color:#efefef">
                 <p>
-                    發佈時間：{{ post.pub_date | date:"Y M d, h:m:s"}}
+                    發佈時間：{{ post.pub_date | date:"Y／m／d ,  h:m:s"}}
                 </p>
             </div>
             <br>
             <br>
+        </div>
 
     {% endfor %}
             {% include 'pagination.html' %}
- {% endblock %}
+{% endblock %}

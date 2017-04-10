@@ -30,7 +30,7 @@
                         {% for event in events %}
                             <li class="event">
                             <a class="title" href='/post/{{event.id}}'>{{event.title}}</a>
-                                <div class="date">{{event.pub_date|date:"Y M j"}}</div>
+                                <div class="date">{{event.pub_date|date:"Y／m／d"}}</div>
                             <div class="place">{{event.place}}</div>
                             </li>
                         {% endfor %}
