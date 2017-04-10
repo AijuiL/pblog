@@ -8,7 +8,7 @@ from datetime import datetime
 class Post(models.Model):
     title = models.CharField(max_length=200,verbose_name=u'title(標題)')
     body = models.TextField(verbose_name=u'body(內文)')
-    pub_date = models.DateTimeField(default=timezone.now,verbose_name=u'現在時刻')
+    pub_date = models.DateTimeField(verbose_name=u'現在時刻')
 
 
     class Meta:

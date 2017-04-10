@@ -6,6 +6,8 @@
 <hr>
 {% endblock %}
 {% block content %}
+            {% load paginate_tags %}
+            {% paginate posts 3 %}
     {% for post in posts %}
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -25,5 +27,7 @@
             </div>
             <br>
             <br>
+
     {% endfor %}
+            {% include 'pagination.html' %}
  {% endblock %}
