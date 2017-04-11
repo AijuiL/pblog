@@ -6,29 +6,16 @@
 <hr>
 {% endblock %}
 {% block content %}
-            {% load paginate_tags %}
-            {% paginate posts 3 %}
+    {% load paginate_tags %}
+    {% paginate posts 3 %}
     {% for post in posts %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <p style='font-family:微軟正黑體;font-size:14pt;font-weight:bold;'>
-                    <a href='/post/{{post.pk}}'>{{ post.title }}</a>
-                </p>
-            </div>
-            <div class="panel-body" style="background-color:#ffffdd">
-                <p>
-                    {{ post.body | truncatechars:40 }}
-                </p>
-            </div>
-            <div class="panel-footer" style="background-color:#efefef">
-                <p>
-                    發佈時間：{{ post.pub_date | date:"Y／m／d ,  h:m:s"}}
-                </p>
-            </div>
-            <br>
-            <br>
+        <div class="body-content">
+            <h4><a href='/post/{{post.pk}}'>{{ post.title }}</a></h4>
+                <p><strong>{{ post.body | truncatechars:40 }}</strong></p>
+                <p>發佈時間：{{ post.pub_date | date:"Y／m／d ,  h:m:s"}}</p>
         </div>
-
+<br>
+<br>
     {% endfor %}
-            {% include 'pagination.html' %}
+{% include 'pagination.html' %}
 {% endblock %}

@@ -193,6 +193,15 @@ a:active {
 }
 
 
+.body-content {
+    width: 150%;
+    height: 150px;
+    background-color: #efefef;
+    box-shadow: 10px 10px 5px #888888;
+
+}
+
+
 /* footer */
 
 .footer {
@@ -222,3 +231,12 @@ a:active {
 		width: 90%;
 	}
 }
+
+.body-content {
+    width: 1225px;
+    height: 145px;
+    background-color: #efefef;
+    box-shadow: 10px 10px 5px #888888;
+
+}
+
