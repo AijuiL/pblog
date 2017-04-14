@@ -6,11 +6,15 @@
     <h3 style='font-family:微軟正黑體;'>{{ post.title }}</h3>
 {% endblock %}
 {% block content %}
-{{ post.body }}
+    {{ post.body }}
         <div class="panel-footer" style="background-color:#efefef">
             <p>
                 發佈時間：{{ post.pub_date | date:"Y／M／d, h:m:s"}}
             </p>
         </div>
-        <p><div>分類： <a href="/category"> {{ post.category.name }}</a></div></p>
+        <div>
+            <p>
+                分類： <a href="/category"> {{ post.category.name }}</a>
+            </p>
+        </div>
 {% endblock %}
