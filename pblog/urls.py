@@ -14,13 +14,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mainsite.views import homepage , showpost , about, contact, archive_index
+from mainsite.views import homepage ,about, contact, archive_index,category
+from mainsite import views
 
 urlpatterns = [
     url(r'^$', homepage),
-    url(r'^post/(\w+)$', showpost) ,
+    url(r'^post/(?P<post_id>[-\w]+)/$', views.ArticleDetailView.as_view(),name='post') ,
+    url(r'^category/$', views.CategoryListView.as_view(), name='categoryList'),
+    url(r'^category/(?P<cate_id>[\w\-]+)/$', views.category, name='category'),
     url(r'^admin/', include(admin.site.urls)) ,
     url(r'^about/',about),
     url(r'^contact/',contact),
     url(r'^archive/',archive_index),
+
 ]

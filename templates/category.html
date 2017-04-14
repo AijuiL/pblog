@@ -1,0 +1,24 @@
+<!-- contact.html -->
+{% extends 'base.html' %}
+{% load markdown_deux_tags %}
+{% block title %} Jia的隨手小記-聯絡我 {% endblock %}
+{% block headmessage %}
+    <h3 style='font-family:標楷體;'>聯絡我</h3>
+<hr>
+{% endblock %}
+{% block content %}
+        {% if category %}
+        <h1>{{ category_name }}</h1>
+            {% if posts %}
+            <ul>
+                {% for post in posts %}
+                <li><a href="{% url 'post' post.pk %}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>No pages currently in category.</strong>
+            {% endif %}
+        {% else %}
+            The specified category {{ category_name }} does not exist!
+        {% endif %}
+{% endblock %}

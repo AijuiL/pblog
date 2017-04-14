@@ -1,0 +1,16 @@
+<!-- Category.html -->
+{% extends 'base.html' %}
+{% load markdown_deux_tags %}
+{% block title %} Jia的隨手小記-聯絡我 {% endblock %}
+{% block headmessage %}
+    <h3>Category</h3>
+<hr>
+{% endblock %}
+{% block content %}
+    <ul>
+        {% for category in category_list %}
+            <li><a href="{{ category.id }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

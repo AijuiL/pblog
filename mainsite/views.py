@@ -1,13 +1,17 @@
 from django.template.loader import get_template
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
-from .models import Post
+from .models import Post, Category
 from django.shortcuts import render
 import markdown2
 from django.template import Context, loader
 from django.http import HttpResponse
 import datetime
 # Create your views here.
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+from django.utils import timezone
+
 
 def homepage(request):
     template = get_template('index.html')
@@ -17,15 +21,19 @@ def homepage(request):
 
     return  HttpResponse(html)
 
-def showpost(request,pk):
-    template = get_template('post.html')
-    try:
-        post = Post.objects.get(pk=pk)
-        if Post != None:
-            html = template.render(locals())
-            return HttpResponse(html)
-    except:
-        return  redirect('/')
+class ArticleDetailView(DetailView):
+    model = Post
+    template_name = "post.html"
+    pk_url_kwarg = 'post_id'
+
+    def get_queryset(self):
+        post_list = Post.objects.filter(status='p')
+        for post in post_list:
+            post.body = markdown2.markdown(post.body,)
+        return post_list
+
+    def get_context_data(self, **kwargs):
+        return super(ArticleDetailView, self).get_context_data(**kwargs)
 
 def about(request):
     template = get_template('about.html')
@@ -38,7 +46,6 @@ def contact(request):
     html = template.render()
 
     return HttpResponse(html)
-
 
 
 def archive_index(request):
@@ -70,3 +77,44 @@ def archive_index(request):
     return HttpResponse(t.render(c))
 
 
+class CategoryListView(ListView):
+
+    model = Category
+    template_name = "categorylist.html"
+    pk_url_kwarg = 'cate_id'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(CategoryListView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['category_list'] = Category.objects.all().order_by('name')
+        return context
+
+def category(request, cate_id):
+
+    # Create a context dictionary which we can pass to the template rendering engine.
+    context_dict = {}
+
+    try:
+        # Can we find a category name slug with the given name?
+        # If we can't, the .get() method raises a DoesNotExist exception.
+        # So the .get() method returns one model instance or raises an exception.
+        category = Category.objects.get(id=cate_id)
+        context_dict['category_name'] = category.name
+
+        # Retrieve all of the associated pages.
+        # Note that filter returns >= 1 model instance.
+        posts = Post.objects.filter(category=category)
+
+        # Adds our results list to the template context under name pages.
+        context_dict['posts'] = posts
+        # We also add the category object from the database to the context dictionary.
+        # We'll use this in the template to verify that the category exists.
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        # We get here if we didn't find the specified category.
+        # Don't do anything - the template displays the "no category" message for us.
+        pass
+
+    # Go render the response and return it to the client.
+    return render(request, 'category.html', context_dict)
