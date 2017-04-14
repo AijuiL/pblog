@@ -15,8 +15,8 @@ class Post(models.Model):
     body = models.TextField(verbose_name=u'body(內文)')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,verbose_name=u'status(文章狀態)')
     pub_date = models.DateTimeField(verbose_name=u'現在時刻')
-    category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL,verbose_name='分類')
-    topped = models.BooleanField(default=False,verbose_name='文章置頂')
+    category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL,verbose_name=u'分類')
+    topped = models.BooleanField(default=False,verbose_name=u'文章置頂')
 
 
     class Meta:
@@ -32,8 +32,8 @@ class Post(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=20,verbose_name='分類名稱')
-    pub_time = models.DateTimeField(auto_now_add=True,verbose_name='建立時間')
+    name = models.CharField(max_length=20,verbose_name=u'分類名稱')
+    pub_time = models.DateTimeField(auto_now_add=True,verbose_name=u'建立時間')
 
 
     class Meta:

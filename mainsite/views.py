@@ -3,14 +3,13 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from .models import Post, Category
 from django.shortcuts import render
-import markdown2
 from django.template import Context, loader
 from django.http import HttpResponse
 import datetime
-# Create your views here.
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.utils import timezone
+# Create your views here.
+
 
 
 class homepage(ListView):
@@ -24,6 +23,7 @@ class homepage(ListView):
     def get_context_data(self, **kwargs):
         return super(homepage, self).get_context_data(**kwargs)
 
+
 class ArticleDetailView(DetailView):
     model = Post
     template_name = "post.html"
@@ -35,6 +35,8 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         return super(ArticleDetailView, self).get_context_data(**kwargs)
+
+
 
 def about(request):
     template = get_template('about.html')
