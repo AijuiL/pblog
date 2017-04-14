@@ -13,13 +13,16 @@ from django.views.generic.list import ListView
 from django.utils import timezone
 
 
-def homepage(request):
-    template = get_template('index.html')
-    posts = Post.objects.all()
-    now = datetime.datetime.now()
-    html = template.render(locals())
+class homepage(ListView):
+    template_name = "index.html"
+    context_object_name = "posts"
 
-    return  HttpResponse(html)
+    def get_queryset(self):
+        posts = Post.objects.filter(status='p')
+        return posts
+
+    def get_context_data(self, **kwargs):
+        return super(homepage, self).get_context_data(**kwargs)
 
 class ArticleDetailView(DetailView):
     model = Post
@@ -28,8 +31,6 @@ class ArticleDetailView(DetailView):
 
     def get_queryset(self):
         post_list = Post.objects.filter(status='p')
-        for post in post_list:
-            post.body = markdown2.markdown(post.body,)
         return post_list
 
     def get_context_data(self, **kwargs):
@@ -50,7 +51,7 @@ def contact(request):
 
 def archive_index(request):
     '''a basic events listing view'''
-    events = Post.objects.filter().order_by('pub_date')
+    events = Post.objects.filter(status='p').order_by('pub_date')
     now = datetime.datetime.now()
 
 
@@ -104,7 +105,8 @@ def category(request, cate_id):
 
         # Retrieve all of the associated pages.
         # Note that filter returns >= 1 model instance.
-        posts = Post.objects.filter(category=category)
+        posts = Post.objects.filter(category=category,status='p')
+
 
         # Adds our results list to the template context under name pages.
         context_dict['posts'] = posts

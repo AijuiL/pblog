@@ -14,11 +14,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mainsite.views import homepage ,about, contact, archive_index,category
+from mainsite.views import about, contact, archive_index, category
 from mainsite import views
 
 urlpatterns = [
-    url(r'^$', homepage),
+    url(r'^$',views.homepage.as_view(),name='index'),
     url(r'^post/(?P<post_id>[-\w]+)/$', views.ArticleDetailView.as_view(),name='post') ,
     url(r'^category/$', views.CategoryListView.as_view(), name='categoryList'),
     url(r'^category/(?P<cate_id>[\w\-]+)/$', views.category, name='category'),
