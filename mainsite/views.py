@@ -52,11 +52,10 @@ def contact(request):
     return HttpResponse(html)
 
 
-def archive_index(request):
+def events_index(request):
     '''a basic events listing view'''
-    events = Post.objects.filter(status='p').order_by('pub_date')
+    events = Post.objects.filter().order_by('-pub_date')
     now = datetime.datetime.now()
-
 
     # create a dict with the years and months:events
     event_dict = {}
@@ -79,7 +78,6 @@ def archive_index(request):
         'now': now, 'list_events': list_events,
     })
     return HttpResponse(t.render(c))
-
 
 class CategoryListView(ListView):
 
