@@ -1,0 +1,22 @@
+<!-- Category.html -->
+{% extends 'base.html' %}
+{% load markdown_deux_tags %}
+{% block title %} Jia的隨手小記-標籤 {% endblock %}
+{% block headmessage %}
+    <h3>Tag</h3>
+<hr>
+{% endblock %}
+{% block content %}
+             <div class="tag-cloud">
+                 <div class="tag-cloud-title">
+                     <h5>目前總共有 {{ tag_list|length }} 個標籤</h5>
+                 </div>
+                 <div class="tag-cloud-tags">
+
+                     {% for tag in tag_list %}
+                     <a href="{% url 'tag' tag.id %}" style="font-size:{{tag.font_size}}px; color:{{tag.color}}"> {{tag.title}} </a>
+                     {% endfor %}
+                 </div>
+             </div>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+<!-- contact.html -->
+{% extends 'base.html' %}
+{% load markdown_deux_tags %}
+{% block title %} Jia的隨手小記-分類 {% endblock %}
+{% block headmessage %}
+    <h3>Tag</h3>
+<hr>
+{% endblock %}
+{% block content %}
+        {% if tag %}
+        <h1>{{ tag.title }}</h1>
+            {% if posts %}
+            <ul>
+                {% for post in posts %}
+                <li><a href="{% url 'post' post.pk %}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>No pages currently in tags.</strong>
+            {% endif %}
+        {% else %}
+            The specified category {{ tag_title }} does not exist!
+        {% endif %}
+{% endblock %}

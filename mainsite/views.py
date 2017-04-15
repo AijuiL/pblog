@@ -1,15 +1,16 @@
+#coding=utf-8
 from django.template.loader import get_template
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
-from .models import Post, Category
+from .models import Post, Category, Tag
 from django.shortcuts import render
 from django.template import Context, loader
 from django.http import HttpResponse
 import datetime
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from templatetags.tag_cloud import TagCloud
 # Create your views here.
-
 
 
 class homepage(ListView):
@@ -119,6 +120,68 @@ def category(request, cate_id):
         # We get here if we didn't find the specified category.
         # Don't do anything - the template displays the "no category" message for us.
         pass
-
     # Go render the response and return it to the client.
     return render(request, 'category.html', context_dict)
+
+
+
+
+class TagListView(ListView):
+    template_name = 'tag_list.html'
+    context_object_name = 'tag_list'
+    model = Tag
+    pk_url_kwarg = 'tag_id'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(TagListView, self).get_context_data(**kwargs)
+        context['tag_list'] = Tag.objects.all().order_by('-title')
+        tag_list = context.get("tag_list")
+
+        for tag in tag_list:
+            post_count = Post.objects.filter(tag=tag,status='p').count()
+            tag.post_count = post_count
+
+        max_count = min_count = 0
+        if len(tag_list) > 0:
+            max_count = max(tag_list, key=lambda tag: tag.post_count).post_count
+            min_count = min(tag_list, key=lambda tag: tag.post_count).post_count
+
+        tag_cloud = TagCloud(min_count, max_count)
+
+        for tag in tag_list:
+            tag_font_size = tag_cloud.get_tag_font_size(tag.post_count)
+            color = tag_cloud.get_tag_color(tag.post_count)
+            tag.color = color
+            tag.font_size = tag_font_size
+
+        return context
+
+def tag(request, tag_id):
+
+    # Create a context dictionary which we can pass to the template rendering engine.
+    context_dict = {}
+
+    try:
+        # Can we find a category name slug with the given name?
+        # If we can't, the .get() method raises a DoesNotExist exception.
+        # So the .get() method returns one model instance or raises an exception.
+        tag = Tag.objects.get(id=tag_id)
+        context_dict['tag_title'] = tag.title
+
+        # Retrieve all of the associated pages.
+        # Note that filter returns >= 1 model instance.
+        posts = Post.objects.filter(tag=tag,status='p')
+
+
+        # Adds our results list to the template context under name pages.
+        context_dict['posts'] = posts
+        # We also add the category object from the database to the context dictionary.
+        # We'll use this in the template to verify that the category exists.
+        context_dict['tag'] = tag
+    except Tag.DoesNotExist:
+        # We get here if we didn't find the specified category.
+        # Don't do anything - the template displays the "no category" message for us.
+        pass
+    # Go render the response and return it to the client.
+    return render(request, 'tag.html', context_dict)

@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^post/(?P<post_id>[-\w]+)/$', views.ArticleDetailView.as_view(), name='post'),
     url(r'^category/$', views.CategoryListView.as_view(), name='categoryList'),
     url(r'^category/(?P<cate_id>[\w\-]+)/$', views.category, name='category'),
+    url(r"^tags$", views.TagListView.as_view(), name="tag_list"),
+    url(r'^tags/(?P<tag_id>[\w\-]+)/$', views.tag, name='tag'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^about/',about),
     url(r'^contact/',contact),

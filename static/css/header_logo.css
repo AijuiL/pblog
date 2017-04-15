@@ -240,3 +240,14 @@ a:active {
 
 }
 
+
+.tag-cloud {
+    text-align: center;
+}
+
+.tag-cloud a {
+    display: inline-block;
+    margin: 10px;
+}
+
+

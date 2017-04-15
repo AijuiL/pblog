@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from datetime import datetime
+import re
 # Create your models here.
 
 class Post(models.Model):
@@ -16,6 +17,7 @@ class Post(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,verbose_name=u'status(文章狀態)')
     pub_date = models.DateTimeField(verbose_name=u'現在時刻')
     category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL,verbose_name=u'分類')
+    tag = models.ManyToManyField('Tag', verbose_name=u'標籤', null=True, blank=True)
     topped = models.BooleanField(default=False,verbose_name=u'文章置頂')
 
 
@@ -47,4 +49,22 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={'cate_id': self.pk})
 
+
+class Tag(models.Model):
+    title = models.CharField('名稱', max_length=50, db_index=True, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.title = re.sub("\s", "", self.title)
+        super(Tag, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ('-title',)
+        verbose_name = u'標籤'
+        verbose_name_plural = u'標籤'
+
+    def __unicode__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'tag_id': self.pk})
 
