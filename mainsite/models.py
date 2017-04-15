@@ -59,8 +59,8 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ('-title',)
-        verbose_name = u'標籤'
-        verbose_name_plural = u'標籤'
+        verbose_name = u"標籤"
+        verbose_name_plural = u"Tag"
 
     def __unicode__(self):
         return self.title

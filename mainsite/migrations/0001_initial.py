@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ('-title',),
                 'verbose_name': '\u6a19\u7c64',
-                'verbose_name_plural': '\u6a19\u7c64',
+                'verbose_name_plural': 'Tag',
             },
         ),
         migrations.CreateModel(
