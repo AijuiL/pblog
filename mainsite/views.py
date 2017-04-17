@@ -1,7 +1,6 @@
 #coding=utf-8
 from django.template.loader import get_template
-from django.http import HttpResponse, Http404
-from django.shortcuts import redirect
+from django.http import HttpResponse
 from .models import Post, Category, Tag
 from django.shortcuts import render
 from django.template import Context, loader
@@ -157,29 +156,14 @@ class TagListView(ListView):
 
 def tag(request, tag_id):
 
-    # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
     try:
-        # Can we find a category name slug with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
         tag = Tag.objects.get(id=tag_id)
         context_dict['tag_title'] = tag.title
-
-        # Retrieve all of the associated pages.
-        # Note that filter returns >= 1 model instance.
         posts = Post.objects.filter(tag=tag,status='p')
-
-
-        # Adds our results list to the template context under name pages.
         context_dict['posts'] = posts
-        # We also add the category object from the database to the context dictionary.
-        # We'll use this in the template to verify that the category exists.
         context_dict['tag'] = tag
     except Tag.DoesNotExist:
-        # We get here if we didn't find the specified category.
-        # Don't do anything - the template displays the "no category" message for us.
         pass
-    # Go render the response and return it to the client.
     return render(request, 'tag.html', context_dict)
