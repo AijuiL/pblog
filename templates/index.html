@@ -10,8 +10,8 @@
     {% paginate posts 3 %}
     {% for post in posts %}
         <div class="body-content">
-            <h4><a href="{% url 'post' post.pk %}">{{ post.title }}</a></h4>
-                <p><strong>{{ post.body | truncatechars:40 }}</strong></p>
+            <h3><a href="{% url 'post' post.pk %}">{{ post.title }}</a></h3>
+                <p><strong>{{ post.summary | truncatechars:50 | safe }}</strong></p>
                 <p>發佈時間：{{ post.pub_date | date:"Y／m／d ,  h:m:s"}}</p>
         </div>
 <br>

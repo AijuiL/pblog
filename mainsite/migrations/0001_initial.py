@@ -30,6 +30,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=200, verbose_name='title(\u6a19\u984c)')),
                 ('body', models.TextField(verbose_name='body(\u5167\u6587)')),
+                ('summary', models.CharField(max_length=100, null=True, verbose_name='summary(\u6458\u8981)', blank=True)),
                 ('status', models.CharField(max_length=1, verbose_name='status(\u6587\u7ae0\u72c0\u614b)', choices=[(b'd', b'Draft'), (b'p', b'Published')])),
                 ('pub_date', models.DateTimeField(verbose_name='\u73fe\u5728\u6642\u523b')),
                 ('topped', models.BooleanField(default=False, verbose_name='\u6587\u7ae0\u7f6e\u9802')),

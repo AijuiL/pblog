@@ -15,6 +15,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=200,verbose_name=u'title(標題)')
     body = models.TextField(verbose_name=u'body(內文)')
+    summary = models.CharField(max_length=100,blank=True, null=True,verbose_name=u'summary(摘要)')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES,verbose_name=u'status(文章狀態)')
     pub_date = models.DateTimeField(verbose_name=u'現在時刻')
     category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL,verbose_name=u'分類')
