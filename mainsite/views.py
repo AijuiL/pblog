@@ -54,7 +54,7 @@ def contact(request):
 
 def events_index(request):
     '''a basic events listing view'''
-    events = Post.objects.filter().order_by('-pub_date')
+    events = Post.objects.filter(status='p').order_by('-pub_date')
     now = datetime.datetime.now()
 
     # create a dict with the years and months:events
