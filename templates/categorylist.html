@@ -9,7 +9,7 @@
 {% block content %}
     <ul>
         {% for category in category_list %}
-        <li><p><a href="{{ category.id }}">{{ category.name }}</a></p></li>
+        <li><h4><a href="{{ category.id }}">{{ category.name }}</a></h4></li>
         {% endfor %}
     </ul>
 {% endblock %}
