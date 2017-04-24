@@ -9,6 +9,12 @@ Deploylink：http://aijuil.herokuapp.com/
 # Running
 Currently I am deploying on Heroku. If you want to running must be setting another local_settings.py in pblog folder. <br>
 
+First you will install postgreSQL and create database "pblog" to your Django framework <br>
+
+Please refer to the below url: <br>
+
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04 <br>
+
 Tree pblog<br>
 
 Treeset：https://goo.gl/1CYOYZ
