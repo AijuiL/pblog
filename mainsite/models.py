@@ -55,10 +55,6 @@ class Category(models.Model):
 class Tag(models.Model):
     title = models.CharField('名稱', max_length=50, db_index=True, unique=True)
 
-    def save(self, *args, **kwargs):
-        self.title = re.sub("\s", "", self.title)
-        super(Tag, self).save(*args, **kwargs)
-
     class Meta:
         ordering = ('-title',)
         verbose_name = u"標籤"
