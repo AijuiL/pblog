@@ -19,7 +19,7 @@ Tree pblog<br>
 
 Treeset：https://goo.gl/1CYOYZ
             
-local_settings.py set link below <br>
+Please refer to set local_settings.py to the below url: <br>
 
 Setcode：https://goo.gl/1r4dbC <br>
 
