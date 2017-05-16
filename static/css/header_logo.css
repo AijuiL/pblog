@@ -250,4 +250,8 @@ a:active {
     margin: 10px;
 }
 
-
+.footer .navigations {
+	background-color: inherit;
+	text-align: center;
+	font-weight: 400;
+}
