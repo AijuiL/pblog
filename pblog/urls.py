@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mainsite.views import about, contact, events_index, category
+from mainsite.views import about
 from mainsite import views
 
 urlpatterns = [
@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^tags/(?P<tag_id>[\w\-]+)/$', views.tag, name='tag'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^about/',about),
-    url(r'^contact/',contact),
     url(r'^archive/',views.events_index, name='events_index'),
 
 ]

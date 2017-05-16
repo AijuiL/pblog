@@ -43,12 +43,6 @@ def about(request):
 
     return HttpResponse(html)
 
-def contact(request):
-    template = get_template('contact.html')
-    html = template.render()
-
-    return HttpResponse(html)
-
 
 def events_index(request):
     '''a basic events listing view'''
