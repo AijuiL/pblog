@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from .models import Post, Category, Tag
 from django.shortcuts import render
 from django.template import Context, loader
-from django.http import HttpResponse
 import datetime
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -58,12 +57,15 @@ def events_index(request):
 
     # create a dict with the years and months:events
     event_dict = {}
-    for i in range(events[0].pub_date.year, events[len(events) - 1].pub_date.year - 1, -1):
-        event_dict[i] = {}
-        for month in range(1, 13):
-            event_dict[i][month] = []
-    for event in events:
-        event_dict[event.pub_date.year][event.pub_date.month].append(event)
+    try:
+        for i in range(events[0].pub_date.year, events[len(events) - 1].pub_date.year - 1, -1):
+            event_dict[i] = {}
+            for month in range(1, 13):
+                event_dict[i][month] = []
+        for event in events:
+            event_dict[event.pub_date.year][event.pub_date.month].append(event)
+    except:
+        pass
 
     # this is necessary for the years to be sorted
     event_sorted_keys = list(reversed(sorted(event_dict.keys())))
