@@ -250,8 +250,14 @@ a:active {
     margin: 10px;
 }
 
-.footer .navigations {
+
+.line-meta a{
 	background-color: inherit;
-	text-align: center;
-	font-weight: 400;
+	position: relative;
+	padding: 1px 5px;
+	text-decoration: none;
+}
+
+.line-meta a:hover{
+	position:relative;top:1px;left:1px;
 }
